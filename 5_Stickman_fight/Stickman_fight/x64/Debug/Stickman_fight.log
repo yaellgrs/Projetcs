@@ -1,0 +1,14 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(513,5): warning MSB8003: la propriété WindowsSDKDir n'est pas définie. Certains outils de build sont introuvables.
+  game.cpp
+  main.cpp
+  Player.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\yvals.h(20,10): error C1083: Impossible d'ouvrir le fichier include : 'crtdbg.h' : No such file or directory
+  (compiler le fichier source 'prog/game.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\yvals.h(20,10): error C1083: Impossible d'ouvrir le fichier include : 'crtdbg.h' : No such file or directory
+  (compiler le fichier source 'prog/main.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\yvals.h(20,10): error C1083: Impossible d'ouvrir le fichier include : 'crtdbg.h' : No such file or directory
+  (compiler le fichier source 'prog/Player.cpp')
+  
+  Génération de code en cours...

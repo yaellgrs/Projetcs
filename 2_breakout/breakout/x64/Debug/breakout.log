@@ -1,0 +1,15 @@
+﻿  ball.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(6,7): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(7,7): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(25,18): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(25,15): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(34,50): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(34,45): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(34,38): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(35,10): warning C4244: '*=' : conversion de 'double' en 'int', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(36,10): warning C4244: '*=' : conversion de 'double' en 'int', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(40,17): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(40,14): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(51,16): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\breakout\code\ball.cpp(51,13): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  breakout.vcxproj -> C:\Users\yaell\OneDrive\Documents\Programmation\SFML\2_breakout\x64\Debug\breakout.exe

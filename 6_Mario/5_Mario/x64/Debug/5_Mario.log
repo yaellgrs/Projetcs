@@ -1,0 +1,14 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(513,5): warning MSB8003: la propriété WindowsSDKDir n'est pas définie. Certains outils de build sont introuvables.
+  game.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\6_Mario\5_Mario\src\game.cpp(1,10): error C1083: Impossible d'ouvrir le fichier include : 'game.h' : No such file or directory
+  main.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\6_Mario\5_Mario\src\main.cpp(3,10): error C1083: Impossible d'ouvrir le fichier include : 'game.h' : No such file or directory
+  maker.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\6_Mario\5_Mario\src\maker.cpp(1,10): error C1083: Impossible d'ouvrir le fichier include : 'maker.h' : No such file or directory
+  monster.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\6_Mario\5_Mario\src\monster.cpp(1,10): error C1083: Impossible d'ouvrir le fichier include : 'monster.h' : No such file or directory
+  Player.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\6_Mario\5_Mario\src\Player.cpp(1,10): error C1083: Impossible d'ouvrir le fichier include : 'Player.h' : No such file or directory
+  Tilemap.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\6_Mario\5_Mario\src\Tilemap.cpp(1,10): error C1083: Impossible d'ouvrir le fichier include : 'Tilemap.h' : No such file or directory
+  Génération de code en cours...
