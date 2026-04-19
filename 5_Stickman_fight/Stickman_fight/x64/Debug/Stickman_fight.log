@@ -1,0 +1,7 @@
+﻿  game.cpp
+  main.cpp
+  Player.cpp
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\codes\5_Stickman_fight\Stickman_fight\prog\Player.cpp(103,41): warning C4305: 'argument' : troncation de 'double' à 'float'
+C:\Users\yaell\OneDrive\Documents\Programmation\SFML\codes\5_Stickman_fight\Stickman_fight\prog\Player.cpp(269,19): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  Génération de code en cours...
+  Stickman_fight.vcxproj -> C:\Users\yaell\OneDrive\Documents\Programmation\SFML\codes\5_Stickman_fight\x64\Debug\Stickman_fight.exe
