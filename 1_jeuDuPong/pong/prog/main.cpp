@@ -3,20 +3,25 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+    bool backMenu = false;
+
+
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Jeu du Pong");    
 
     //players
     sf::RectangleShape ping(sf::Vector2f(20.f, 200.f));
-    ping.setPosition(5.f, 200.f);
+
 
     //players 2
     sf::RectangleShape pong(sf::Vector2f(20.f, 200.f));
-    pong.setPosition(775.f, 200.f);
+
     pong.setFillColor(sf::Color(255, 0, 232, 255));
 
     //ball
     sf::CircleShape ball(10.f);
-    ball.setPosition(390, 290);
+
+
+    Init(ball, ping, pong);
 
     //menu
     sf::Texture menuTexture;
@@ -29,7 +34,7 @@ int main()
     //Game Over
     sf::Texture overTexture;
     if (!overTexture.loadFromFile("img/Over.jpg")) {
-        printf("loading error of menu\n");
+        printf("loading error of over\n");
     }
     sf::Sprite over;
     over.setTexture(overTexture);
@@ -73,7 +78,7 @@ int main()
         if (2 > ball.getPosition().x || ball.getPosition().x > 778) {
             x = 0.f;
             y = 0.f;
-            g = 2;
+            if(!backMenu ) g = 2;
         }
 
 
@@ -95,8 +100,19 @@ int main()
                 score = 0;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                window.close();
+                if (g == 0)
+                {
+                    printf("close");
+                    window.close();
+                }
+                else
+                    backMenu = true;
             }
+            else if(backMenu){
+                g = 0;
+                backMenu = false;
+                Init(ball, ping, pong);
+			}   
         }  
 
         if (g == 0) {

@@ -59,3 +59,11 @@ void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape
     window.draw(text);
     window.display();
 }
+
+
+void Init(sf::CircleShape& ball, sf::RectangleShape& ping, sf::RectangleShape& pong)
+{
+    ball.setPosition(390, 290);
+    pong.setPosition(775.f, 200.f);
+    ping.setPosition(5.f, 200.f);
+}
