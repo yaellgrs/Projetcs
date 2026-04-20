@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include <fstream>
 
 int main()
 {
@@ -46,7 +46,7 @@ int main()
     }
     sf::Text text;
     text.setFont(font);
-    text.setPosition(700, 20);
+    text.setPosition(600, 20);
     text.setCharacterSize(75);
     int score = 0;
 
@@ -71,6 +71,24 @@ int main()
     window.setFramerateLimit(120);
 
     int g = 0;
+
+    std::fstream f_record;
+
+	f_record.open("img/record.txt", std::ios::in | std::ios::out);
+    int record = 0;
+
+    if (!f_record.is_open()) {
+
+        std::ofstream o_record("img/record.txt");
+        o_record << "0";;
+
+        printf("création du fichier record\n");
+
+        o_record.close();
+    }
+
+    f_record >> record;
+    f_record.close();
     
     sf::Clock clock;
     while (window.isOpen())
@@ -82,7 +100,7 @@ int main()
         }
 
 
-        text.setString(std::to_string(score));
+        text.setString(std::to_string(score) + " - " + std::to_string(record));
         sf::Event event;
 
         while (window.pollEvent(event))
@@ -112,6 +130,10 @@ int main()
                 g = 0;
                 backMenu = false;
                 Init(ball, ping, pong);
+                if (score > record) record = score;
+                std::ofstream out("img/record.txt", std::ios::trunc);
+                out << record;
+                out.close();
 			}   
         }  
 
@@ -145,6 +167,7 @@ int main()
         
 
     }
+
 
     return 0;
 }
