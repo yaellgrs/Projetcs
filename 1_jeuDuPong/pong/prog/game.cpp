@@ -9,6 +9,7 @@ int ballplay(sf::CircleShape& ball, sf::RectangleShape ping, sf::RectangleShape&
         x = -x;
         ball.move(x, y);
         x += 0.5;
+        ball.setFillColor(sf::Color(255, 255, 255, 255));
         return 1;
 
     }
@@ -16,6 +17,7 @@ int ballplay(sf::CircleShape& ball, sf::RectangleShape ping, sf::RectangleShape&
         x += 0.5;
         x = -x;
         ball.move(x, y);
+        ball.setFillColor(sf::Color(255, 0, 232, 255));
         return 2;
 
     }

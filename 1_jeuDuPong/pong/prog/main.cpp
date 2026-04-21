@@ -33,6 +33,7 @@ int main()
     sf::CircleShape ball(10.f);
 
 
+
     Init(ball, ping, pong);
 
     //menu
@@ -169,7 +170,7 @@ int main()
             if (event.type == sf::Event::Closed) {
                     window.close();
             }
-            if (gameMode == GameMode::menu && (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))) {
+            if ((gameMode == GameMode::menu || gameMode == GameMode::over) && (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))) {
                 gameMode = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ? GameMode::normal: GameMode::versus;
                 ball.setPosition(390, 290);
                 pong.setPosition(775.f, 200.f);
