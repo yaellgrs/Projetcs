@@ -53,7 +53,7 @@ void player2(sf::RectangleShape& pong) {
     }
 }
 
-void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape& pong,  sf::CircleShape& ball, sf::Text text, sf::Text speed, sf::Text Txt_timerStart) {
+void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape& pong,  sf::CircleShape& ball, sf::Text text, sf::Text speed, sf::Text Txt_timerStart,sf::Text Txt_inputPlayer1, sf::Text Txt_inputPlayer2) {
     window.clear();
     window.draw(ping);
     window.draw(pong);
@@ -61,6 +61,8 @@ void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape
     window.draw(text);
     window.draw(speed);
     window.draw(Txt_timerStart);
+    window.draw(Txt_inputPlayer1);
+    window.draw(Txt_inputPlayer2);
     window.display();
 }
 

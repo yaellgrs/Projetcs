@@ -16,7 +16,7 @@ void player1(sf::RectangleShape& ping);
 
 void player2(sf::RectangleShape& pong);
 
-void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape& pong, sf::CircleShape& ball, sf::Text text, sf::Text speed, sf::Text Txt_timerStart);
+void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape& pong, sf::CircleShape& ball, sf::Text text, sf::Text speed, sf::Text Txt_timerStart, sf::Text Txt_inputPlayer1, sf::Text Txt_inputPlayer2);
 
 void Init(sf::CircleShape& ball, sf::RectangleShape& ping, sf::RectangleShape& pong);
 

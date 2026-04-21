@@ -82,6 +82,18 @@ int main()
     Txt_timerStart.setString("3");
     Txt_timerStart.setPosition((SCREEN_WIDTH - Txt_timerStart.getLocalBounds().width) / 2, (SCREEN_HEIGHT - Txt_timerStart.getLocalBounds().height) / 2 );
 
+    sf::Text Txt_inputPlayer1;
+    Txt_inputPlayer1.setFont(font);
+    Txt_inputPlayer1.setCharacterSize(60);
+    Txt_inputPlayer1.setString("MOVE : Z / S");
+    Txt_inputPlayer1.setPosition(((SCREEN_WIDTH - Txt_inputPlayer1.getLocalBounds().width) / 2) * 0.1f, ((SCREEN_HEIGHT - Txt_inputPlayer1.getLocalBounds().height) / 10) *9);
+
+    sf::Text Txt_inputPlayer2;
+    Txt_inputPlayer2.setFont(font);
+    Txt_inputPlayer2.setCharacterSize(60);
+    Txt_inputPlayer2.setString("MOVE : UP / DOWN");
+    Txt_inputPlayer2.setPosition(((SCREEN_WIDTH - Txt_inputPlayer2.getLocalBounds().width) / 2) * 1.9f, ((SCREEN_HEIGHT - Txt_inputPlayer2.getLocalBounds().height) / 10)*9);
+    Txt_inputPlayer2.setFillColor(sf::Color(255, 0, 232, 255));
 
     int normalScore = 0;
     int playerScore1 = 0;
@@ -237,11 +249,15 @@ int main()
                 y = 0.f;
                 float time = 3.f - clock.getElapsedTime().asSeconds();
                 Txt_timerStart.setString(std::to_string((int)time));
+                Txt_inputPlayer1.setString("MOVE : Z / S");
+                Txt_inputPlayer2.setString("MOVE : UP / DOWN");
                 if(clock.getElapsedTime() >= sf::seconds(3))
                 {
                     InitSpeed(x, y);
                     canPlay = true;
                     Txt_timerStart.setString("");
+                    Txt_inputPlayer1.setString("");
+                    Txt_inputPlayer2.setString("");
                 }
             }
 
@@ -263,7 +279,7 @@ int main()
 
 
 
-            game(window, ping, pong, ball, Txt_score, Txt_speed, Txt_timerStart);
+            game(window, ping, pong, ball, Txt_score, Txt_speed, Txt_timerStart, Txt_inputPlayer1, Txt_inputPlayer2);
         }
 
         
