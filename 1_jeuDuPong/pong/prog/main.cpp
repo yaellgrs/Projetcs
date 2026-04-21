@@ -1,12 +1,21 @@
 #include "game.h"
 #include <fstream>
+#include <algorithm>
+#include <iostream>
+
+enum GameMode {
+    menu,
+    normal,
+    versus,
+    over
+};
 
 int main()
 {
     bool backMenu = false;
 
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Jeu du Pong");    
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, 600), "Jeu du Pong");
 
     //players
     sf::RectangleShape ping(sf::Vector2f(20.f, 200.f));
@@ -51,11 +60,24 @@ int main()
     if(!font.loadFromFile("img/Thanks.ttf")){
         printf("loading error of font\n");
     }
-    sf::Text text;
-    text.setFont(font);
-    text.setPosition(600, 20);
-    text.setCharacterSize(75);
-    int score = 0;
+    sf::Text Txt_score;
+    Txt_score.setFont(font);
+    Txt_score.setCharacterSize(75);
+    Txt_score.setString("0 - 0");
+    Txt_score.setPosition((SCREEN_WIDTH - Txt_score.getLocalBounds().width) / 2, 20);
+
+    sf::Text Txt_speed;
+    Txt_speed.setFont(font);
+    Txt_speed.setCharacterSize(75);
+    Txt_speed.setString("0 - 0");
+    Txt_speed.setPosition((SCREEN_WIDTH - Txt_score.getLocalBounds().width) / 2, 20);
+
+
+
+    int normalScore = 0;
+    int playerScore1 = 0;
+    int playerScore2 = 0;
+    
 
     //son pong
     sf::SoundBuffer pongbuffer;
@@ -77,7 +99,7 @@ int main()
     float x = SPEED, y = SPEED;
     window.setFramerateLimit(120);
 
-    int g = 0;
+    GameMode gameMode = GameMode::menu;
 
     std::fstream f_record;
 
@@ -101,13 +123,37 @@ int main()
     while (window.isOpen())
     {   
         if (2 > ball.getPosition().x || ball.getPosition().x > 778) {
-            x = 0.f;
-            y = 0.f;
-            if(!backMenu ) g = 2;
+
+            if (gameMode == GameMode::normal) {
+                x = 0.f;
+                y = 0.f;
+            }
+            else {
+                InitSpeed(x, y);
+            }
+
+            if (2 > ball.getPosition().x) {
+                playerScore2++;
+                Init(ball, ping, pong);
+                x = SPEED;
+                y = SPEED;
+            }
+            else {
+                playerScore1++;
+				Init(ball, ping, pong);
+                x = SPEED;
+                y = SPEED;
+            }
+
+            
+            if(!backMenu && ( gameMode == GameMode::normal || std::max(playerScore1, playerScore2) >= MAX_VERSUS_SCORE)) gameMode = GameMode::over;
         }
 
-
-        text.setString(std::to_string(score) + " - " + std::to_string(record));
+        if(gameMode == GameMode::normal)
+            Txt_score.setString(std::to_string(normalScore) + " - " + std::to_string(record));
+        else if (gameMode == GameMode::versus)
+            Txt_score.setString(std::to_string(playerScore1) + " - " + std::to_string(playerScore2));
+        
         sf::Event event;
 
         while (window.pollEvent(event))
@@ -115,26 +161,27 @@ int main()
             if (event.type == sf::Event::Closed) {
                     window.close();
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                g = 1;
+            if (gameMode == GameMode::menu && (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))) {
+                gameMode = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ? GameMode::normal: GameMode::versus;
                 ball.setPosition(390, 290);
                 pong.setPosition(775.f, 200.f);
                 ping.setPosition(5.f, 200.f);
-                x = SPEED;
-                y = SPEED;
+                InitSpeed(x, y);
 
-                if (score > record)
+                if (normalScore > record)
                 {
-                    record = score;
+                    record = normalScore;
                     std::ofstream out("img/record.txt", std::ios::trunc);
                     out << record;
                     out.close();
                     printf("new record : %d\n", record);
                 }
-                score = 0;
+                normalScore = 0;;
+                playerScore1 = 0;
+				playerScore2 = 0;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                if (g == 0)
+                if (gameMode == GameMode::menu)
                 {
                     printf("close");
                     window.close();
@@ -143,21 +190,29 @@ int main()
                     backMenu = true;
             }
             else if(backMenu){
-                g = 0;
+                gameMode = GameMode::menu;
                 backMenu = false;
                 Init(ball, ping, pong);
 			}   
         }  
 
-        if (g == 0) {
+        if (gameMode == GameMode::menu){
             window.clear();
             window.draw(menu);
             window.display();
         }
-        else if (g == 1) {
+        else if (gameMode == GameMode::over) {
+            window.clear();
+            if (normalScore > record)
+                window.draw(Sp_newRecord);
+            else
+                window.draw(over);
+            window.display();
+        }
+        else {
             int n = ballplay(ball, ping, pong, x, y);
             if ( n > 0 ) {
-                score++; 
+                if(gameMode == GameMode::normal) normalScore++; 
                 if (n == 1) {
                     pingSound.play();
                 }
@@ -169,16 +224,9 @@ int main()
             }
             player1(ping);
             player2(pong);
-            game(window, ping, pong, ball, text);
+            game(window, ping, pong, ball, Txt_score);
         }
-        else if(g == 2){
-            window.clear();
-            if(score > record)
-                window.draw(Sp_newRecord);
-			else
-                window.draw(over);
-            window.display();
-        }
+
         
 
     }

@@ -67,3 +67,8 @@ void Init(sf::CircleShape& ball, sf::RectangleShape& ping, sf::RectangleShape& p
     pong.setPosition(775.f, 200.f);
     ping.setPosition(5.f, 200.f);
 }
+
+void InitSpeed(float& x, float& y) {
+     x = (rand() % 2 == 0) ? -SPEED: SPEED;
+     y = (rand() % 2 == 0) ? -SPEED: SPEED;
+}
