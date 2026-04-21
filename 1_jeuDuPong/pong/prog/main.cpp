@@ -18,7 +18,7 @@ int main()
     bool backMenu = false;
 
 
-    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, 600), "Jeu du Pong");
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Jeu du Pong");
 
     //players
     sf::RectangleShape ping(sf::Vector2f(20.f, 200.f));
@@ -76,6 +76,11 @@ int main()
     Txt_speed.setString("speed : 1.1");
     Txt_speed.setPosition((SCREEN_WIDTH - Txt_speed.getLocalBounds().width) / 2, 30 + Txt_score.getLocalBounds().height);
 
+    sf::Text Txt_timerStart;
+    Txt_timerStart.setFont(font);
+    Txt_timerStart.setCharacterSize(175);
+    Txt_timerStart.setString("3");
+    Txt_timerStart.setPosition((SCREEN_WIDTH - Txt_timerStart.getLocalBounds().width) / 2, (SCREEN_HEIGHT - Txt_timerStart.getLocalBounds().height) / 2 );
 
 
     int normalScore = 0;
@@ -124,6 +129,8 @@ int main()
     f_record.close();
     
     sf::Clock clock;
+    bool canPlay = false;
+
     while (window.isOpen())
     {   
         if (2 > ball.getPosition().x || ball.getPosition().x > 778) {
@@ -133,19 +140,22 @@ int main()
                 y = 0.f;
             }
             else {
-                InitSpeed(x, y);
+                clock.restart();
+                canPlay = false;
             }
 
             if (2 > ball.getPosition().x) {
                 playerScore2++;
                 Init(ball, ping, pong);
-                InitSpeed(x, y);
+                clock.restart();
+                canPlay = false;
                 x *= 2;
             }
             else {
                 playerScore1++;
 				Init(ball, ping, pong);
-                InitSpeed(x, y);
+                clock.restart();
+                canPlay = false;
                 x *= 2;
             }
 
@@ -175,7 +185,9 @@ int main()
                 ball.setPosition(390, 290);
                 pong.setPosition(775.f, 200.f);
                 ping.setPosition(5.f, 200.f);
-                InitSpeed(x, y);
+                clock.restart();
+                canPlay = false;
+
 
                 if (normalScore > record)
                 {
@@ -219,9 +231,24 @@ int main()
             window.display();
         }
         else {
+            if (!canPlay )
+            {
+                x = 0.f;
+                y = 0.f;
+                float time = 3.f - clock.getElapsedTime().asSeconds();
+                Txt_timerStart.setString(std::to_string((int)time));
+                if(clock.getElapsedTime() >= sf::seconds(3))
+                {
+                    InitSpeed(x, y);
+                    canPlay = true;
+                    Txt_timerStart.setString("");
+                }
+            }
+
+
             int n = ballplay(ball, ping, pong, x, y);
-            if ( n > 0 ) {
-                if(gameMode == GameMode::normal) normalScore++; 
+            if (n > 0) {
+                if (gameMode == GameMode::normal) normalScore++;
                 if (n == 1) {
                     pingSound.play();
                 }
@@ -229,11 +256,14 @@ int main()
                     pongSound.play();
                 }
 
- 
+
             }
             player1(ping);
             player2(pong);
-            game(window, ping, pong, ball, Txt_score, Txt_speed);
+
+
+
+            game(window, ping, pong, ball, Txt_score, Txt_speed, Txt_timerStart);
         }
 
         
