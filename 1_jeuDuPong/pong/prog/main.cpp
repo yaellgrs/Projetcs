@@ -1,7 +1,10 @@
 #include "game.h"
 #include <fstream>
 #include <algorithm>
-#include <iostream>
+#include <iostream>*
+#include <sstream>
+#include <iomanip>
+
 
 enum GameMode {
     menu,
@@ -69,8 +72,8 @@ int main()
     sf::Text Txt_speed;
     Txt_speed.setFont(font);
     Txt_speed.setCharacterSize(75);
-    Txt_speed.setString("0 - 0");
-    Txt_speed.setPosition((SCREEN_WIDTH - Txt_score.getLocalBounds().width) / 2, 20);
+    Txt_speed.setString("speed : 1.1");
+    Txt_speed.setPosition((SCREEN_WIDTH - Txt_speed.getLocalBounds().width) / 2, 30 + Txt_score.getLocalBounds().height);
 
 
 
@@ -135,14 +138,14 @@ int main()
             if (2 > ball.getPosition().x) {
                 playerScore2++;
                 Init(ball, ping, pong);
-                x = SPEED;
-                y = SPEED;
+                InitSpeed(x, y);
+                x *= 2;
             }
             else {
                 playerScore1++;
 				Init(ball, ping, pong);
-                x = SPEED;
-                y = SPEED;
+                InitSpeed(x, y);
+                x *= 2;
             }
 
             
@@ -153,6 +156,11 @@ int main()
             Txt_score.setString(std::to_string(normalScore) + " - " + std::to_string(record));
         else if (gameMode == GameMode::versus)
             Txt_score.setString(std::to_string(playerScore1) + " - " + std::to_string(playerScore2));
+        
+        float speed = std::max(std::abs(x), std::abs(y));
+        std::ostringstream oss;
+        oss << std::fixed << std::setprecision(1) << (speed - 1 ) ;
+		Txt_speed.setString("speed : " + oss.str());
         
         sf::Event event;
 
@@ -224,7 +232,7 @@ int main()
             }
             player1(ping);
             player2(pong);
-            game(window, ping, pong, ball, Txt_score);
+            game(window, ping, pong, ball, Txt_score, Txt_speed);
         }
 
         

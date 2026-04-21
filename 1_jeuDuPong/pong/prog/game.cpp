@@ -8,12 +8,12 @@ int ballplay(sf::CircleShape& ball, sf::RectangleShape ping, sf::RectangleShape&
     if (ballBox.intersects(ping.getGlobalBounds())) {
         x = -x;
         ball.move(x, y);
-        x += 0.25;
+        x += 0.5;
         return 1;
 
     }
     if (ballBox.intersects(pong.getGlobalBounds())) {
-        x += 0.25;
+        x += 0.5;
         x = -x;
         ball.move(x, y);
         return 2;
@@ -51,12 +51,13 @@ void player2(sf::RectangleShape& pong) {
     }
 }
 
-void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape& pong,  sf::CircleShape& ball, sf::Text text) {
+void game(sf::RenderWindow& window, sf::RectangleShape& ping, sf::RectangleShape& pong,  sf::CircleShape& ball, sf::Text text, sf::Text speed) {
     window.clear();
     window.draw(ping);
     window.draw(pong);
     window.draw(ball);
     window.draw(text);
+    window.draw(speed);
     window.display();
 }
 
