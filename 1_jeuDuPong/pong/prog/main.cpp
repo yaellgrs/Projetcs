@@ -39,6 +39,13 @@ int main()
     sf::Sprite over;
     over.setTexture(overTexture);
 
+    sf::Texture T_newRecord;
+    if (!T_newRecord.loadFromFile("img/newRecord.jpg")) {
+        printf("loading error of new record\n");
+    }
+    sf::Sprite Sp_newRecord;
+    Sp_newRecord.setTexture(T_newRecord);
+
     //score
     sf::Font font;
     if(!font.loadFromFile("img/Thanks.ttf")){
@@ -115,6 +122,15 @@ int main()
                 ping.setPosition(5.f, 200.f);
                 x = SPEED;
                 y = SPEED;
+
+                if (score > record)
+                {
+                    record = score;
+                    std::ofstream out("img/record.txt", std::ios::trunc);
+                    out << record;
+                    out.close();
+                    printf("new record : %d\n", record);
+                }
                 score = 0;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -130,10 +146,6 @@ int main()
                 g = 0;
                 backMenu = false;
                 Init(ball, ping, pong);
-                if (score > record) record = score;
-                std::ofstream out("img/record.txt", std::ios::trunc);
-                out << record;
-                out.close();
 			}   
         }  
 
@@ -161,7 +173,10 @@ int main()
         }
         else if(g == 2){
             window.clear();
-            window.draw(over);
+            if(score > record)
+                window.draw(Sp_newRecord);
+			else
+                window.draw(over);
             window.display();
         }
         
