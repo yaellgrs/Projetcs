@@ -2,7 +2,7 @@
 
 
 void Game::initWindow() {
-	window = new sf::RenderWindow(sf::VideoMode(1200, 800), "Breackout");
+	window = new sf::RenderWindow(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT	), "Breakout");
 	window->setFramerateLimit(120);
 }
 
@@ -25,7 +25,9 @@ void Game::initPlayer() {
 		printf("loading errror of barre texture\n");
 	}
 	barre.setTexture(barreTex);
-	barre.setPosition(500, 760);
+	int posY = SCREEN_HEIGHT - barre.getGlobalBounds().height;
+	int posX = (SCREEN_WIDTH - barre.getGlobalBounds().width) /2;
+	barre.setPosition(posX, posY);
 }
 
 void Game::initBall() {

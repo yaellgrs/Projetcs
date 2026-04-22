@@ -9,7 +9,7 @@ private:
 	sf::CircleShape ball;
 	int x;
 	int y;
-
+		
 	void initBall();
 public:
 	Ball();
