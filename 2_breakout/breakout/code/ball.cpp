@@ -2,7 +2,7 @@
 
 void Ball::initBall() {
 	ball.setRadius(10.f);
-	ball.setPosition(580, 600);
+	ball.setPosition(SCREEN_HEIGHT/2, SCREEN_WIDTH / 2);	
 	x = -SPEED;
 	y = -SPEED;
 }
@@ -14,16 +14,17 @@ Ball::Ball() {
 
 
 //retourner un bricks ? 
-int Ball::upBall(std::vector<sf::RectangleShape>bricks, sf::Sprite barre) {
+int Ball::upBall(std::vector<sf::RectangleShape>* bricks, sf::Sprite barre) {
 		
 		sf::FloatRect ballBox = ball.getGlobalBounds();
 		int i = 0;
-		for (auto& brick : bricks) {
+		for (auto& brick : *bricks) {
 			if (ballBox.intersects(brick.getGlobalBounds())) {
 				y = -y;
 
 				ball.move(x, y);
-				return i;
+				bricks->erase(bricks->begin() + i);
+				return 1;
 			}
 			i++;
 		}
@@ -31,20 +32,20 @@ int Ball::upBall(std::vector<sf::RectangleShape>bricks, sf::Sprite barre) {
 		if (ballBox.intersects(barre.getGlobalBounds())) {
 			y = -y;
 			if (rand() % 100 < 25) {
-				ball.setFillColor(sf::Color(155, 155.f, 0.f, 100.f));
+				ball.setFillColor(sf::Color(255.f, 255.f, 255.f));
 				x *= 1.5;
 				y *= 1.5;
 			}
 		}
-		else if (ball.getPosition().y > 778) {
-			ball.move(x, y);
+		else if (ball.getPosition().y > SCREEN_HEIGHT - ballBox.height) {
+			//ball.move(x, y);
 			return -2;
 			
 		}
 		else if (ball.getPosition().y < 2) {
 			y = -y;
 		}
-		else if (ball.getPosition().x > 1188 || ball.getPosition().x < 2) {
+		else if (ball.getPosition().x > SCREEN_WIDTH - ballBox.width || ball.getPosition().x < ballBox.width) {
 			x = -x;
 		}
 

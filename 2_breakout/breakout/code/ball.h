@@ -2,7 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <random>
 
-#define SPEED 3.f
+#include "Consts.h"
+
+
 
 class Ball {
 private:
@@ -13,7 +15,7 @@ private:
 	void initBall();
 public:
 	Ball();
-	int upBall(std::vector<sf::RectangleShape>bricks, sf::Sprite barre);
+	int upBall(std::vector<sf::RectangleShape>* bricks, sf::Sprite barre);
 	sf::CircleShape getBall();
 	int getX();
 	int getY();

@@ -86,37 +86,30 @@ void Game::upPlayer() {
 
 
 void Game::upBall() {
-	int i = 0;
 	bool dba = false;
 	bool dbr = false;
 	int x = 0;
-	for (auto& ball : balls) {
-		if (dbr == false) {
-			x = ball.upBall(bricks, barre);
+
+	auto balls_copie = balls;
+
+	for (int i = 0; i < balls.size();) {
+		x = balls[i].upBall(&bricks, barre);
+
+		if (x == -2) { //ball hors écran 
+			balls.erase(balls.begin() + i);
+			continue;
 		}
-		if (x == -2) {
-			dba = true;
-		}
-		else if (x > 0) {
+		else if (x == 1) { //brick détruite
 			dbr = true;
 			if (rand() % 100 < 25) {
 				Ball ball;
 				balls.push_back(ball);
 			}
 		}
-		if (dba == false) {
-			i++;
-		}
+		i++;
 	}
-	if (dba == true) {
-		balls.erase(balls.begin() + i);
-	}
-	if (dbr == true) {
-		bricks.erase(bricks.begin() + x);
-	}
-	if (balls.size() == 0) {
+	if (balls.empty())
 		statut = 3;
-	}
 }
 
 void Game::upGame() {
