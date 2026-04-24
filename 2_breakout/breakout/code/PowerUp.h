@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Consts.h"
+#include "Ball.h"
 
 class PowerUp : public sf::Drawable {
 public:
@@ -12,6 +13,8 @@ public:
 public:
 	float posX;
 	float posY;
+
+	bool collected = false;
 
 	sf::Texture texture;
 	sf::Sprite* sprite;
@@ -23,8 +26,9 @@ private:
 
 public:
 	PowerUp(float x, float y);
+	~PowerUp();
 	
-	void Update();
+	void Update(sf::Sprite* barre, std::vector<Ball*>* balls);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

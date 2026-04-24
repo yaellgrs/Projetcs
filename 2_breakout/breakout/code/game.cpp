@@ -74,8 +74,10 @@ void Game::update() {
 	upGame();
 
 	for (PowerUp* powerUp : powerUps) {
-		powerUp->Update();
+		powerUp->Update(&barre, &balls);
 	}
+	powerUps.erase(std::remove_if(powerUps.begin(), powerUps.end(), [](const PowerUp* pow) { return pow->collected; }), powerUps.end());
+
 
 }
 
@@ -162,7 +164,7 @@ void Game::render() {
 	}
 
 	for (PowerUp* powerUp : powerUps) {
-		window->draw(*powerUp);
+			window->draw(*powerUp);
 	}
 
 	window->display();

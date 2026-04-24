@@ -16,11 +16,24 @@ PowerUp::PowerUp(float x, float y)
 	InitSprite();
 }
 
-void PowerUp::Update()
+PowerUp::~PowerUp()
+{
+	delete sprite;
+}
+
+void PowerUp::Update(sf::Sprite* barre, std::vector<Ball*>* balls)
 {
 	this->posY += GRAVITY_FORCE * SPEED;
 
 	sprite->setPosition(this->posX, this->posY);
+	if (collected) return;
+
+	sf::FloatRect box = sprite->getGlobalBounds();
+	if(box.intersects(barre->getGlobalBounds()))
+	{
+		balls->push_back(new Ball());
+		collected = true;
+	}
 }
 
 void PowerUp::draw(sf::RenderTarget& target, sf::RenderStates states) const
