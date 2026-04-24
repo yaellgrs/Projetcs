@@ -14,12 +14,12 @@ Ball::Ball() {
 
 
 //retourner un bricks ? 
-int Ball::upBall(std::vector<sf::RectangleShape>* bricks, sf::Sprite barre) {
+int Ball::upBall(std::vector<sf::RectangleShape*>* bricks, sf::Sprite barre) {
 		
 		sf::FloatRect ballBox = ball.getGlobalBounds();
 		int i = 0;
 		for (auto& brick : *bricks) {
-			if (ballBox.intersects(brick.getGlobalBounds())) {
+			if (ballBox.intersects(brick->getGlobalBounds())) {
 				y = -y;
 
 				ball.move(x, y);
@@ -59,10 +59,10 @@ sf::CircleShape Ball::getBall() {
 	return ball;
 }
 
-int Ball::getX() {
-	return x;
+float Ball::GetPosX() {
+	return this->ball.getPosition().x;
 }
 
-int Ball::getY() {
-	return y;
+float Ball::GetPosY() {
+	return this->ball.getPosition().y;
 }

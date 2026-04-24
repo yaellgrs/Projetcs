@@ -32,7 +32,7 @@ void Game::initPlayer() {
 
 void Game::initBall() {
 	balls.clear();
-	Ball ball;
+	Ball* ball = new Ball();
 	balls.push_back(ball);
 
 }
@@ -45,9 +45,9 @@ void Game::initBrick() {
 
 		while (10 + 60 * j < 1200) {
 
-			sf::RectangleShape brick(sf::Vector2f(50, 20));
-			brick.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255, 255));
-			brick.setPosition(5.f + 60.f * j, 10.f + i*30);
+			sf::RectangleShape* brick = new sf::RectangleShape(sf::Vector2f(50, 20));
+			brick->setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255, 255));
+			brick->setPosition(5.f + 60.f * j, 10.f + i*30);
 			bricks.push_back(brick);
 			j++;
 			x++;
@@ -73,43 +73,45 @@ void Game::update() {
 	upBall();
 	upGame();
 
+	for (PowerUp* powerUp : powerUps) {
+		powerUp->Update();
+	}
+
 }
 
 void Game::upPlayer() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && barre.getPosition().x > 0) {
 		barre.move(-10.f, 0.f);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && barre.getPosition().x < 990) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && barre.getPosition().x < (SCREEN_WIDTH - barre.getGlobalBounds().width)) {
 		barre.move(10, 0.f);
 	}
 }
 
 
 void Game::upBall() {
-	bool dba = false;
-	bool dbr = false;
 	int x = 0;
-
-	auto balls_copie = balls;
-
+	printf("---------\n");
 	for (int i = 0; i < balls.size();) {
-		x = balls[i].upBall(&bricks, barre);
+
+		printf("ball : %d posx: %f, posy: %f\n", i, balls[i]->GetPosX(), balls[i]->GetPosY());
+
+		x = balls[i]->upBall(&bricks, barre);
 
 		if (x == -2) { //ball hors écran 
 			balls.erase(balls.begin() + i);
 			continue;
 		}
 		else if (x == 1) { //brick détruite
-			dbr = true;
-			if (rand() % 100 < 25) {
-				Ball ball;
-				balls.push_back(ball);
+			if (rand() % 100 < 100) {
+				PowerUp* powerUp = new PowerUp(balls[i]->GetPosX(), balls[i]->GetPosY());
+				powerUps.push_back(powerUp);
 			}
 		}
 		i++;
 	}
 	if (balls.empty())
-		statut = 3;
+		mode = GameMode::over;
 }
 
 void Game::upGame() {
@@ -118,19 +120,27 @@ void Game::upGame() {
 		if (event.type == sf::Event::Closed) {
 			window->close();
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-			window->close();
+		else if (KeyReleased && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			KeyReleased = false;
+			if (mode == GameMode::menu)
+				window->close();
+			else
+				mode = GameMode::menu;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		else if (KeyReleased && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			KeyReleased = false;
 			initPlayer();
 			initBrick();
 			initBall();
-			if (statut == 3) {
-				statut = 0;
+			if (mode == GameMode::over) {
+				mode = GameMode::menu;
 			}
 			else {
-				statut = 1;
+				mode = GameMode::play;
 			}
+		}
+		else {
+			KeyReleased = true;
 		}
 	}
 }
@@ -143,13 +153,18 @@ void Game::render() {
 	window->clear();
 	window->draw(barre);
 	for (auto ball : balls) {
-		window->draw(ball.getBall());
+		window->draw(ball->getBall());
 	}
 
 
 	for (auto brick : bricks) {
-		window->draw(brick);
+		window->draw(*brick);
 	}
+
+	for (PowerUp* powerUp : powerUps) {
+		window->draw(*powerUp);
+	}
+
 	window->display();
 
 }
@@ -170,16 +185,16 @@ void Game::run() {
 
 
 	while (window->isOpen()) {
-		if (statut == 0) {
+		if (mode == GameMode::menu) {
 			upGame();
 			renderMenu();
 		}
 		//a fixer
-		else if(statut == 1) {
+		else if(mode == GameMode::play) {
 			update();
 			render();
 		}
-		else {
+		else {//over
 			upGame();
 			renderOver();
 		}

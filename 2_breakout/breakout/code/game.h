@@ -4,14 +4,21 @@
 
 #include "ball.h"
 #include "Consts.h"
+#include "PowerUp.h"
 
+enum GameMode {
+	menu,
+	play, 
+	over
+};
 
 class Game
 {
 private:
 	sf::RenderWindow* window;
 	sf::Event event;
-	int statut = 0;
+	//int statut = 0;
+	GameMode mode = GameMode::menu;
 	//menu
 	sf::Texture menuTx;
 	sf::Sprite menuSp;
@@ -23,9 +30,12 @@ private:
 	sf::Texture barreTex;
 	//balle
 	//Ball ball;
-	std::vector<Ball>balls;
+	std::vector<Ball*>balls;
 	//brick
-	std::vector<sf::RectangleShape>bricks;
+	std::vector<sf::RectangleShape*>bricks;
+	std::vector<PowerUp*> powerUps;
+
+	bool KeyReleased = true;
 
 
 	//init

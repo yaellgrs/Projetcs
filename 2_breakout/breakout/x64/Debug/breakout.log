@@ -1,4 +1,16 @@
-﻿  game.cpp
+﻿  ball.cpp
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(6,6): warning C4244: '=' : conversion de 'const float' en 'int', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(7,6): warning C4244: '=' : conversion de 'const float' en 'int', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(25,18): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(25,15): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(35,47): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(35,40): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(35,33): warning C4244: 'argument' : conversion de 'float' en 'sf::Uint8', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(36,10): warning C4244: '*=' : conversion de 'double' en 'int', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(37,10): warning C4244: '*=' : conversion de 'double' en 'int', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(52,16): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\ball.cpp(52,13): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  game.cpp
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(28,11): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(28,11): warning C4244:         with
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(28,11): warning C4244:         [
@@ -11,8 +23,6 @@ C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(29,11): warning 
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(29,11): warning C4244:         ]
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(30,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(30,20): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(109,11): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'unsigned __int64'
-      C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(109,11):
-      utilisez '%zd' dans la chaîne de format
-  
+  main.cpp
+  Génération de code en cours...
   breakout.vcxproj -> C:\Users\astri\Documents\SFML\2_breakout\x64\Debug\breakout.exe

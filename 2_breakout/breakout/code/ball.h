@@ -15,8 +15,8 @@ private:
 	void initBall();
 public:
 	Ball();
-	int upBall(std::vector<sf::RectangleShape>* bricks, sf::Sprite barre);
+	int upBall(std::vector<sf::RectangleShape*>* bricks, sf::Sprite barre);
 	sf::CircleShape getBall();
-	int getX();
-	int getY();
+	float GetPosX();
+	float GetPosY();
 };
