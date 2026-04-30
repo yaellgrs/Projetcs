@@ -55,6 +55,17 @@ void Game::initBrick() {
 	}
 }
 
+void Game::initTexts()
+{
+	font.loadFromFile("img/Thanks.ttf");
+	Txt_balls.setFont(font);
+	Txt_balls.setString("Balls : 0");
+	Txt_balls.setCharacterSize(50);
+	float posX = 10;
+	float posY = (SCREEN_HEIGHT - Txt_balls.getGlobalBounds().height) / 2;
+	Txt_balls.setPosition(posX, posY);
+}
+
 Game::Game() {
 
 	initWindow();
@@ -62,6 +73,7 @@ Game::Game() {
 	initOver();
 	initPlayer();
 	initBall();
+	initTexts();
 }
 
 /*                ------------------------------
@@ -147,6 +159,11 @@ void Game::upGame() {
 	}
 }
 
+void Game::upTexts()
+{
+
+}
+
 /*		          		     UPDATE
 				------------------------------
 */
@@ -154,6 +171,7 @@ void Game::upGame() {
 void Game::render() {
 	window->clear();
 	window->draw(barre);
+
 	for (auto ball : balls) {
 		window->draw(ball->getBall());
 	}
@@ -167,6 +185,7 @@ void Game::render() {
 			window->draw(*powerUp);
 	}
 
+	window->draw(Txt_balls);
 	window->display();
 
 }

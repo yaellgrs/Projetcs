@@ -22,6 +22,10 @@ private:
 	//menu
 	sf::Texture menuTx;
 	sf::Sprite menuSp;
+
+	sf::Font font;
+	sf::Text Txt_balls;
+
 	//Game over
 	sf::Texture overTx;
 	sf::Sprite overSp;
@@ -45,6 +49,7 @@ private:
 	void initPlayer();
 	void initBall();
 	void initBrick();
+	void initTexts();
 
 public:
 	Game();
@@ -54,6 +59,7 @@ public:
 	void upPlayer();
 	void upBall();
 	void upGame();
+	void upTexts();
 
 	//render
 	void render();
