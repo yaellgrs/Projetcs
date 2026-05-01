@@ -39,20 +39,32 @@ void Game::initBall() {
 
 void Game::initBrick() {
 	bricks.clear();
-	int x = 0;
-	for (int i = 0; i < 5; i++) {
-		int j = 0;
+	int maxHeight = 5;
+	int maxWidth = 10;
 
-		while (10 + 60 * j < 1200) {
+	for (int i = 0; i < maxHeight; i++) {
 
-			sf::RectangleShape* brick = new sf::RectangleShape(sf::Vector2f(50, 20));
+		for (int j = 0; j < maxWidth; j++) {
+			float gutter = 5.f;
+			float sizeX = ((SCREEN_WIDTH - gutter) / maxWidth) - gutter;
+			float sizeY = (( (SCREEN_HEIGHT * 0.3f) -gutter) / maxHeight) - gutter;
+			// 1 - 0 - 1 - 0 - 1
+			//width = gutter + (size+gutter)*n
+			// (width - gutter)/n) - gutter ) size;
+			//((width - gutter)/n)-gutter = size+gutter
+
+
+			sf::RectangleShape* brick = new sf::RectangleShape(sf::Vector2f(sizeX, sizeY));
 			brick->setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255, 255));
-			brick->setPosition(5.f + 60.f * j, 10.f + i*30);
+			brick->setPosition(gutter + (sizeX + gutter) * j, gutter + (sizeY + gutter) * i);
 			bricks.push_back(brick);
-			j++;
-			x++;
 		}
+
+
+
+
 	}
+	printf("brick size :%d", bricks.size());
 }
 
 void Game::initTexts()
@@ -105,10 +117,7 @@ void Game::upPlayer() {
 
 void Game::upBall() {
 	int x = 0;
-	printf("---------\n");
 	for (int i = 0; i < balls.size();) {
-
-		printf("ball : %d posx: %f, posy: %f\n", i, balls[i]->GetPosX(), balls[i]->GetPosY());
 
 		x = balls[i]->upBall(&bricks, barre);
 
@@ -120,6 +129,7 @@ void Game::upBall() {
 			if (rand() % 100 < 100) {
 				PowerUp* powerUp = new PowerUp(balls[i]->GetPosX(), balls[i]->GetPosY());
 				powerUps.push_back(powerUp);
+				upTexts();
 			}
 		}
 		i++;
@@ -161,7 +171,7 @@ void Game::upGame() {
 
 void Game::upTexts()
 {
-
+	Txt_balls.setString("Balls :" + std::to_string(balls.size()));
 }
 
 /*		          		     UPDATE
