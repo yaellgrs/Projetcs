@@ -23,8 +23,14 @@ private:
 	sf::Texture menuTx;
 	sf::Sprite menuSp;
 
+	//timer
+	sf::Clock clock;
+	sf::RectangleShape Rs_hider;
+
+	//Texts
 	sf::Font font;
 	sf::Text Txt_balls;
+	sf::Text Txt_timer;
 
 	//Game over
 	sf::Texture overTx;
@@ -60,6 +66,7 @@ public:
 	void upBall();
 	void upGame();
 	void upTexts();
+	bool upTimer();
 
 	//render
 	void render();

@@ -33,8 +33,6 @@ int Ball::upBall(std::vector<sf::RectangleShape*>* bricks, sf::Sprite barre) {
 			y = -y;
 			if (rand() % 100 < 25) {
 				ball.setFillColor(sf::Color(255.f, 255.f, 255.f));
-				x *= 1.5;
-				y *= 1.5;
 			}
 		}
 		else if (ball.getPosition().y > SCREEN_HEIGHT - ballBox.height) {

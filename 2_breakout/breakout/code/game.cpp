@@ -53,18 +53,12 @@ void Game::initBrick() {
 			// (width - gutter)/n) - gutter ) size;
 			//((width - gutter)/n)-gutter = size+gutter
 
-
 			sf::RectangleShape* brick = new sf::RectangleShape(sf::Vector2f(sizeX, sizeY));
-			brick->setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255, 255));
+			brick->setFillColor(sf::Color(255,255,255, 255));
 			brick->setPosition(gutter + (sizeX + gutter) * j, gutter + (sizeY + gutter) * i);
 			bricks.push_back(brick);
 		}
-
-
-
-
 	}
-	printf("brick size :%d", bricks.size());
 }
 
 void Game::initTexts()
@@ -73,9 +67,25 @@ void Game::initTexts()
 	Txt_balls.setFont(font);
 	Txt_balls.setString("Balls : 0");
 	Txt_balls.setCharacterSize(50);
-	float posX = 10;
-	float posY = (SCREEN_HEIGHT - Txt_balls.getGlobalBounds().height) / 2;
-	Txt_balls.setPosition(posX, posY);
+
+	Txt_balls.setPosition(
+		10,
+		(SCREEN_HEIGHT - Txt_balls.getGlobalBounds().height) / 2
+	);
+
+	Txt_timer.setFont(font);
+	Txt_timer.setString("3");
+	Txt_timer.setCharacterSize(100);
+	Txt_timer.setPosition(
+		(SCREEN_WIDTH - Txt_timer.getGlobalBounds().width) / 2,
+		(SCREEN_HEIGHT - Txt_timer.getGlobalBounds().height) / 2
+	);
+
+
+
+
+	Rs_hider = sf::RectangleShape(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+	Rs_hider.setFillColor(sf::Color(0, 0, 0, 170));
 }
 
 Game::Game() {
@@ -93,9 +103,15 @@ Game::Game() {
 */
 
 void Game::update() {
-	upPlayer();
-	upBall();
+
 	upGame();
+	if (upTimer()) {
+		upPlayer();
+		upBall();
+
+	}
+
+	
 
 	for (PowerUp* powerUp : powerUps) {
 		powerUp->Update(&barre, &balls);
@@ -126,7 +142,7 @@ void Game::upBall() {
 			continue;
 		}
 		else if (x == 1) { //brick détruite
-			if (rand() % 100 < 100) {
+			if (rand() % 100 < POWERUP_PROBABILITIE) {
 				PowerUp* powerUp = new PowerUp(balls[i]->GetPosX(), balls[i]->GetPosY());
 				powerUps.push_back(powerUp);
 				upTexts();
@@ -156,12 +172,10 @@ void Game::upGame() {
 			initPlayer();
 			initBrick();
 			initBall();
-			if (mode == GameMode::over) {
-				mode = GameMode::menu;
-			}
-			else {
-				mode = GameMode::play;
-			}
+			mode = GameMode::play;
+			clock.restart();
+			Rs_hider.setFillColor(sf::Color(0, 0, 0, 200));
+			Txt_timer.setFillColor(sf::Color(255, 255, 255, 255));
 		}
 		else {
 			KeyReleased = true;
@@ -172,6 +186,20 @@ void Game::upGame() {
 void Game::upTexts()
 {
 	Txt_balls.setString("Balls :" + std::to_string(balls.size()));
+}
+
+bool Game::upTimer()
+{
+		if (clock.getElapsedTime().asSeconds() < 3.f){
+			float time = TIMER_START - clock.getElapsedTime().asSeconds();
+			Txt_timer.setString(std::to_string((int)time));
+			return false;
+		}
+		else {
+			Rs_hider.setFillColor(sf::Color(0, 0, 0, 0));
+			Txt_timer.setFillColor(sf::Color(0, 0, 0, 0));
+			return true;
+		}
 }
 
 /*		          		     UPDATE
@@ -186,7 +214,6 @@ void Game::render() {
 		window->draw(ball->getBall());
 	}
 
-
 	for (auto brick : bricks) {
 		window->draw(*brick);
 	}
@@ -195,7 +222,10 @@ void Game::render() {
 			window->draw(*powerUp);
 	}
 
+
 	window->draw(Txt_balls);
+	window->draw(Rs_hider);
+	window->draw(Txt_timer);
 	window->display();
 
 }

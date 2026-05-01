@@ -11,8 +11,4 @@ C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(29,11): warning 
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(29,11): warning C4244:         ]
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(30,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(30,20): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(67,9): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'unsigned __int64'
-      C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(67,9):
-      utilisez '%zd' dans la chaîne de format
-  
   breakout.vcxproj -> C:\Users\astri\Documents\SFML\2_breakout\x64\Debug\breakout.exe
