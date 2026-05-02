@@ -8,3 +8,5 @@ constexpr int POWERUP_PROBABILITIE = 10;
 constexpr float TIMER_START = 3.f;
 
 constexpr float GRAVITY_FORCE = 9.71f;
+
+constexpr int TOP_MARGIN = 50.f;

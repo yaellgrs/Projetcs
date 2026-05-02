@@ -40,7 +40,7 @@ int Ball::upBall(std::vector<sf::RectangleShape*>* bricks, sf::Sprite barre) {
 			return -2;
 			
 		}
-		else if (ball.getPosition().y < 2) {
+		else if (ball.getPosition().y < TOP_MARGIN) {
 			y = -y;
 		}
 		else if (ball.getPosition().x > SCREEN_WIDTH - ballBox.width || ball.getPosition().x < ballBox.width) {
@@ -63,4 +63,9 @@ float Ball::GetPosX() {
 
 float Ball::GetPosY() {
 	return this->ball.getPosition().y;
+}
+
+void Ball::SetPosition(float x, float y)
+{
+	ball.setPosition(x, y);
 }

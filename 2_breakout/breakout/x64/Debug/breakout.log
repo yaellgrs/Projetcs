@@ -1,4 +1,7 @@
 ﻿  game.cpp
+C:\Users\astri\Documents\SFML\2_breakout\breakout\code\Consts.h(12,26): warning C4244: 'initialisation' : conversion de 'float' en 'const int', perte possible de données
+  (compiler le fichier source 'code/game.cpp')
+  
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(28,11): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(28,11): warning C4244:         with
 C:\Users\astri\Documents\SFML\2_breakout\breakout\code\game.cpp(28,11): warning C4244:         [

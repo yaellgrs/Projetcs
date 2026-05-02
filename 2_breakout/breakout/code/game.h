@@ -27,10 +27,16 @@ private:
 	sf::Clock clock;
 	sf::RectangleShape Rs_hider;
 
-	//Texts
+	//HUD
 	sf::Font font;
+	sf::Texture T_ball;
+	sf::Sprite Sp_ball;
+
 	sf::Text Txt_balls;
+	sf::Text Txt_stage;
 	sf::Text Txt_timer;
+	sf::Text Txt_score;
+
 
 	//Game over
 	sf::Texture overTx;
@@ -45,6 +51,10 @@ private:
 	std::vector<sf::RectangleShape*>bricks;
 	std::vector<PowerUp*> powerUps;
 
+public:
+	int stage = 0;
+	int score = 0;
+
 	bool KeyReleased = true;
 
 
@@ -55,7 +65,9 @@ private:
 	void initPlayer();
 	void initBall();
 	void initBrick();
-	void initTexts();
+	void initHUD();
+
+
 
 public:
 	Game();
@@ -65,8 +77,12 @@ public:
 	void upPlayer();
 	void upBall();
 	void upGame();
-	void upTexts();
+	void upHUD();
 	bool upTimer();
+
+	//fonctions
+
+	void LevelUpStage();
 
 	//render
 	void render();

@@ -19,4 +19,6 @@ public:
 	sf::CircleShape getBall();
 	float GetPosX();
 	float GetPosY();
+
+	void SetPosition(float x, float y);
 };
